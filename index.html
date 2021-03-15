@@ -61,10 +61,29 @@
         }
         const getAPI = async () => {
             // Completar: Llamar a la API para leer la información guardada en myjson a través de la API
+            try {
+								let res = await fetch(localStorage.URL);
+                return await res.json;               
+            } catch (err) {
+                alert("No se ha podido extraer la base de datos.")
+            }
           
         }
         const updateAPI = async (peliculas) => {
             // Completar: Actualizar la información a través de la API
+            try {
+                const res = await fetch(localStorage.URL, {
+                  method: 'PUT', 
+                  headers:{
+                      "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(peliculas)
+                });
+                const {uri} = await res.json();
+                return uri;               
+            } catch (err) {
+                alert("No se ha podido actualizar la base de datos.")
+            }
         }
 
  
