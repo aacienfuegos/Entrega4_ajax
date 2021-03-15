@@ -63,7 +63,7 @@
             // Completar: Llamar a la API para leer la información guardada en myjson a través de la API
             try {
 								let res = await fetch(localStorage.URL);
-                return await res.json;               
+                return await res.json();               
             } catch (err) {
                 alert("No se ha podido extraer la base de datos.")
             }
@@ -97,13 +97,16 @@
               view += `
                 <div class="movie">
                    <div class="movie-img">
-                        <img class="show" data-my-id="${i}" src="${peliculas[i].miniatura}" onerror="this.src='files/placeholder.png'"/>
+                        <img data-my-id="${i}" src="${peliculas[i].miniatura}" onerror="this.src='files/placeholder.png'"/>
                    </div>
                    <div class="title">
                        ${peliculas[i].titulo || "<em>Sin título</em>"}
                    </div>
                    <div class="actions">
-                       <button class="edit" data-my-id="${i}">editar</button>
+                        <!--Insertar aquí botones de "Show" y "Delete"-->
+												<button class="show" data-my-id="${i}">Ver</button>
+												<button class="edit" data-my-id="${i}">editar</button>
+												<button class="delete" data-my-id="${i}">Borrar</button>
                     </div>
                 </div>\n`;
               i = i + 1;
@@ -111,6 +114,8 @@
 
             view += `<div class="actions">
                         <!--Insertar aquí botones de "Añadir" y "Reset"-->
+												<button class="new">Añadir</button>
+												<button class="reset">Reset</button>
                     </div>`;
 
             return view;
@@ -198,7 +203,7 @@
 
         const showContr = (i) => {
             // Completar: controlador que muestra la vista showView()
-						let pelicula = JSON.parse(localStorage.mis_peliculas)[i];
+						let pelicula = localStorage.mis_peliculas[i];
 						document.getElementById('main').innerHTML = showView(pelicula);
         }
 
