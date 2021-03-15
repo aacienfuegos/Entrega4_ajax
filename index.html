@@ -203,7 +203,7 @@
 
         const showContr = (i) => {
             // Completar: controlador que muestra la vista showView()
-						let pelicula = localStorage.mis_peliculas[i];
+						let pelicula = mis_peliculas[i];
 						document.getElementById('main').innerHTML = showView(pelicula);
         }
 
@@ -214,12 +214,11 @@
 
         const createContr = async () => {
             // Completar: controlador que crea una película nueva en el modelo guardado en myjson
-								let mis_peliculas = JSON.parse(localStorage.mis_peliculas);
 								new_pelicula = {titulo: document.getElementById('titulo').value,   
 																director: document.getElementById('director').value, 
 																"miniatura": document.getElementById('miniatura').value};
 								mis_peliculas.push(new_pelicula);
-								localStorage.mis_peliculas = JSON.stringify(mis_peliculas);
+								await updateAPI(mis_peliculas);
 								indexContr();
         }
 
@@ -239,15 +238,14 @@
             // Completar:  controlador que actualiza el modelo borrando la película seleccionada
             // Genera diálogo de confirmación: botón Aceptar devuelve true, Cancel false
 								if(!confirm("Seguro que desea borrar esta película")) return;
-				        let mis_peliculas = JSON.parse(localStorage.mis_peliculas);
 								mis_peliculas.splice(i,1);
-							  localStorage.mis_peliculas = JSON.stringify(mis_peliculas);
+								await updateAPI(mis_peliculas);
 								indexContr();
         }
 
         const resetContr = async () => {
             // Completar:  controlador que reinicia el modelo guardado en myjson con las películas originales
-								localStorage.mis_peliculas = JSON.stringify(mis_peliculas_iniciales);
+								await updateAPI(mis_peliculas_iniciales);
 								indexContr();
         }
 
