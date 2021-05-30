@@ -2,8 +2,7 @@
   "name": "Entrega4_ajax",
   "version": "1.0.1",
   "description": "CORE_MVC_AJAX",
-  "scripts": {
-  },
+  "scripts": {},
   "keywords": [
     "CORE"
   ],
@@ -14,6 +13,8 @@
     "serverUrl": "https://autocorector.dit.upm.es/",
     "courseId": "8249",
     "assignmentId": "76880"
+  },
+  "dependencies": {
+    "autocorector": "^1.7.1"
   }
 }
-
